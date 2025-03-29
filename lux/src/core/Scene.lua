@@ -14,23 +14,19 @@ Scene.camera = Camera(0, 0) ---@type lux.core.Camera
 
 --- @protected
 local function add(obj)
-    print("added")
     -- add the object and check if have the Z component --
     if obj.z then
-        table.insert(Scene.gameScenes[Scene.currentScene].objects, obj)
+        table.push(Scene.gameScenes[Scene.currentScene].objects, obj)
         table.sort(Scene.gameScenes[Scene.currentScene].objects, function(a, b)
             return a.z < a.b
         end)
-        return
     end
-    table.insert(Scene.gameScenes[Scene.currentScene].objects, obj)
-    print(inspect(Scene.gameScenes))
 end
 
 --- @protected
 local function drawBGGrid(width, height, cellSize)
-    for y = 0, math.floor(height), 1 do
-        for x = 0, math.floor(width), 1 do
+    for y = 0, math.floor(height / cellSize), 1 do
+        for x = 0, math.floor(width / cellSize), 1 do
             local ogc = { love.graphics.getColor() }
             if (x + y) % 2 == 0 then
                 love.graphics.setColor(((x + y) % 2 == 0) and Color.fromInt(0x808080FF) or Color.fromInt(0x414141FF))
@@ -86,6 +82,7 @@ function Scene.switchScene(name)
         end
     end
     Scene.currentScene = name
+
     -- reset camera --
     Scene.camera:reset()
     Engine.onSceneInit:trigger(name)
@@ -97,33 +94,35 @@ function Scene.switchScene(name)
 end
 
 function Scene.draw()
-    if Scene.gameScenes[Scene.currentScene].meta.background[4] < 0 then
-        --love.graphics.rectangle("fill")
+    --local oldScissor = { love.graphics.getScissor() }
+    --love.graphics.setScissor(0, 0, Engine.width, Engine.height)
+    if Scene.gameScenes[Scene.currentScene].meta.background[4] <= 0 then
         drawBGGrid(Engine.width, Engine.height, 32)
     else
-
+        love.graphics.setColor(Scene.gameScenes[Scene.currentScene].meta.background)
+        love.graphics.rectangle("fill", 0, 0, Engine.width, Engine.height)
     end
+    love.graphics.setColor(Color.WHITE)
     if #Scene.gameScenes[Scene.currentScene].objects > 0 then
-        Scene.camera:start()
-        for _, obj in ipairs(Scene.gameScenes[Scene.currentScene].objects) do
-            table.sort(Scene.gameScenes[Scene.currentScene].objects, function(a, b)
-                if a.z and b.z then return a.z < a.b end
-            end)
-            if obj.__draw and obj.visible then
-                obj:__draw()
-            end
-            if obj.children then
-                if #obj.children > 0 then
-                    _lume.each(obj.children, function(c)
-                        if c.__draw and (obj.visible or c.visible) then
-                            c:__draw()
-                        end
-                    end)
+        --Scene.camera:start()
+            for _, obj in ipairs(Scene.gameScenes[Scene.currentScene].objects) do
+                if obj.__draw and obj.visible then
+                    love.graphics.print("anus", 32, 32)
+                    obj:__draw()
                 end
+                --[[if obj.children then
+                    if #obj.children > 0 then
+                        _lume.each(obj.children, function(c)
+                            if c.__draw and (obj.visible or c.visible) then
+                                c:__draw()
+                            end
+                        end)
+                    end
+                end--]]
             end
-        end
-        Scene.camera:stop()
+        --Scene.camera:stop()
     end
+    --love.graphics.setScissor(unpack(oldScissor))
 end
 
 function Scene.update(elapsed)

@@ -12,6 +12,12 @@ local function hexToRGBA(hex)
     local g = bit.band(bit.rshift(hex, hasAlpha and 16 or 8), 0xFF) / 255
     local b = bit.band(bit.rshift(hex, hasAlpha and 8 or 0), 0xFF) / 255
     local a = hasAlpha and (bit.band(hex, 0xFF) / 255) or 1.0 -- Se não houver alpha, assume 1.0
+
+    -- Se o valor for totalmente transparente (0x00000000), força o alpha para 0
+    if hex == 0x00000000 then
+        a = 0
+    end
+
     return { r, g, b, a }
 end
 

@@ -3,7 +3,6 @@ local Engine = import 'Engine'  ---@type lux.Engine
 --- @class lux.core.Camera
 local Camera = class:extend("Camera")
 function Camera:new(x, y, zoom, rotation)
-    Camera.super.new(self, x, y, zoom, rotation)
     self.x = x or Engine.width / 2
     self.y = y or Engine.height / 2
     self.zoom = zoom or 1
@@ -61,7 +60,6 @@ function Camera:worldCoords(x, y)
     local ox, oy =  0, 0
     local w, h = Engine.width, Engine.height
 
-    -- x,y = (((x,y) - center) / self.scale):rotated(-self.rot) + (self.x,self.y)
     local c, s = math.cos(-self.rotation), math.sin(-self.rotation)
     x, y = (x - w / 2 - ox) / self.zoom, (y - h / 2 - oy) / self.zoom
     x, y = c * x - s * y, s * x + c * y

@@ -8,9 +8,8 @@ return function(components)
     local meta = { __index = {} }
     for _, component in ipairs(components) do
         local c
-
         if type(component) == "string" then table.insert(self.tags, component) else c = component() end
-    
+
         if c ~= nil then
             for k, v in pairs(c) do
                 if type(v) == "function" then

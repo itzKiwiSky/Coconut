@@ -7,6 +7,15 @@ function table.contains(_table, _value)
     return false
 end
 
+function table.push(t, ...)
+    local n = select("#", ...)
+    for i = 1, n do
+        t[#t + 1] = select(i, ...)
+    end
+    return ...
+end
+
+
 function table.concatf(tbl, sep, transform)
     sep = sep or ""
     transform = transform or function(k, v) return v end

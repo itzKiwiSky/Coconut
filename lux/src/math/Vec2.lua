@@ -123,4 +123,4 @@ function Vec2:ge(v)
     return self.x >= v.x and self.y >= v.y
 end
 
-return setmetatable(Vec2, { __call = function(_, ...) return Vec2.new(...) end})
+return Vec2

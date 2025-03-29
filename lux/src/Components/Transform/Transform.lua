@@ -1,4 +1,5 @@
 return function()
+    local Engine = import 'Engine'
     local vec2 = import 'Math.Vec2'
 
     local TransformComponent = {
@@ -7,7 +8,7 @@ return function()
     }
 
     function TransformComponent:center(this)
-        self.pos.x, self.pos.y = Dino2D.push.getWidth() / 2, Dino2D.push.getHeight() / 2
+        self.pos.x, self.pos.y = Engine.width / 2, Engine.height / 2
     end
 
     return TransformComponent

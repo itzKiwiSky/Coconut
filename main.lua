@@ -7,7 +7,6 @@ if love.arg.parseGameArguments(arg)[1] == "--test" then
 
     local tests = fsutil.scanFolder("Tests/suites")
     for _, test in ipairs(tests) do
-        --dino2d.scene.reset()
         local t = require((test:gsub("/", ".")):gsub("%.lua", ""))
         t({
             lust = lust,
@@ -28,12 +27,13 @@ lux.scene.newScene("idea", function(scene)
         lux.Components.Transform,
         lux.Components.Text,
     })
+    
 
-    obj:add(text)
-
-    print(inspect(obj))
+    obj:centerOrigin()
 
     scene.add(obj)
+
+    print(inspect(lux.scene.gameScenes["idea"]))
 end)
 
 lux.scene.switchScene("idea")

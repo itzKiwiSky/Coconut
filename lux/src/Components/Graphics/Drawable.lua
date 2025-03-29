@@ -13,11 +13,13 @@ return function(...)
         color = Color.WHITE,
     }
 
-    if not self.pos then
-        self.pos = vec2.ZERO()
-    end
-
     function DrawableComponent:__draw()
+        if not self then
+            self = {
+                pos = vec2.ZERO()
+            }
+        end
+        if not self.pos then self.pos = vec2.ZERO() end
         love.graphics.setColor(type(self.color) == "table" and self.color or Color.fromInt(self.color))
             love.graphics.draw(
                 self.drawable,

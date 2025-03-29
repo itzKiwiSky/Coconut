@@ -146,7 +146,7 @@ function Lux2D.init(config)
                         Lux2D.engine.onSceneDraw:trigger()
                         Lux2D.scene.draw()
                     love.graphics.setCanvas()
-                love.graphics.pop("all")
+                love.graphics.pop()
 
                 Lux2D.engine.onPreDraw:trigger()
                 love.graphics.origin()
