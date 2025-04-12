@@ -56,7 +56,7 @@ function AssetPool.addAudio(tag, source, type)
 end
 
 function AssetPool.addFont(tag, source)
-    AssetPool.fonts.paths[tag] = font(source)
+    AssetPool.fonts.paths[tag] = font:new(source)
 end
 
 return AssetPool

@@ -4,7 +4,7 @@
 ---
 local Signal = class:extend("Signal")
 
-function Signal:new()
+function Signal:__construct()
     self.connected = {}
     self.connectedOnce = {}
     self.cancelled = {}

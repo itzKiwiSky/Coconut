@@ -2,7 +2,7 @@ local Engine = import 'Engine'  ---@type lux.Engine
 
 --- @class lux.core.Camera
 local Camera = class:extend("Camera")
-function Camera:new(x, y, zoom, rotation)
+function Camera:__construct(x, y, zoom, rotation)
     self.x = x or Engine.width / 2
     self.y = y or Engine.height / 2
     self.zoom = zoom or 1

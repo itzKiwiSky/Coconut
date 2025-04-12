@@ -23,32 +23,32 @@ Engine.timeScale = 1.0                  --- @type integer
 --- is currently within
 Engine.vsync = false                    --- @type boolean
 
-Engine.onLoad = Signal()                --- @type lux.utils.Signal
+Engine.onLoad = Signal:new()                --- @type lux.utils.Signal
 
-Engine.onPreDraw = Signal()             --- @type lux.utils.Signal
+Engine.onPreDraw = Signal:new()             --- @type lux.utils.Signal
 
-Engine.onDraw = Signal()                --- @type lux.utils.Signal
+Engine.onDraw = Signal:new()                --- @type lux.utils.Signal
 
-Engine.onPostDraw = Signal()            --- @type lux.utils.Signal
+Engine.onPostDraw = Signal:new()           --- @type lux.utils.Signal
 
-Engine.onUpdate = Signal()              --- @type lux.utils.Signal
+Engine.onUpdate = Signal:new()             --- @type lux.utils.Signal
 
-Engine.onSceneEnter = Signal()          --- @type lux.utils.Signal
+Engine.onSceneEnter = Signal:new()         --- @type lux.utils.Signal
 
-Engine.onSceneLeave = Signal()          --- @type lux.utils.Signal
+Engine.onSceneLeave = Signal:new()         --- @type lux.utils.Signal
 
-Engine.onSceneInit = Signal()           --- @type lux.utils.Signal
+Engine.onSceneInit = Signal:new()          --- @type lux.utils.Signal
 
-Engine.onSceneDraw = Signal()           --- @type lux.utils.Signal
+Engine.onSceneDraw = Signal:new()          --- @type lux.utils.Signal
 
-Engine.onSceneUpdate = Signal()         --- @type lux.utils.Signal
+Engine.onSceneUpdate = Signal:new()        --- @type lux.utils.Signal
 
-Engine.onInput = Signal()               --- @type lux.utils.Signal
+Engine.onInput = Signal:new()              --- @type lux.utils.Signal
 
-Engine.onWindowResize = Signal()        --- @type lux.utils.Signal
+Engine.onWindowResize = Signal:new()       --- @type lux.utils.Signal
 
-Engine.onWindowStateChange = Signal()   --- @type lux.utils.Signal
+Engine.onWindowStateChange = Signal:new()  --- @type lux.utils.Signal
 
-Engine.onQuit = Signal()                --- @type lux.utils.Signal
+Engine.onQuit = Signal:new()               --- @type lux.utils.Signal
 
 return Engine

@@ -5,6 +5,7 @@ local Color = import 'Utils.Color'
 return function()
     local CircleShapeComponent = {}
     table.deepmerge(CircleShapeComponent, ShapeRenderer())
+    CircleShapeComponent.__super = CircleShapeComponent.__draw
     
     CircleShapeComponent.radius = 32
     CircleShapeComponent.segments = 30
@@ -38,12 +39,10 @@ return function()
         self.verts = CreateCirclePolygon(CircleShapeComponent.segments, CircleShapeComponent.radius, self.pos.x, self.pos.y)
     end
 
-    local shapeDraw = CircleShapeComponent.__draw
-
     function CircleShapeComponent:__draw()
         self.verts = CreateCirclePolygon(CircleShapeComponent.segments, CircleShapeComponent.radius, self.pos.x, self.pos.y)
         -- super --
-        shapeDraw(self)
+        CircleShapeComponent:__super()
     end
 
     return CircleShapeComponent

@@ -10,7 +10,7 @@ local Scene = {
     currentScene = "root",
 }
 
-Scene.camera = Camera(0, 0) ---@type lux.core.Camera
+Scene.camera = Camera:new(0, 0) ---@type lux.core.Camera
 
 --- @protected
 local function add(obj)
@@ -102,12 +102,11 @@ function Scene.draw()
         love.graphics.setColor(Scene.gameScenes[Scene.currentScene].meta.background)
         love.graphics.rectangle("fill", 0, 0, Engine.width, Engine.height)
     end
-    love.graphics.setColor(Color.WHITE)
+    love.graphics.setColor(1, 1, 1, 1)
     if #Scene.gameScenes[Scene.currentScene].objects > 0 then
-        --Scene.camera:start()
+        Scene.camera:start()
             for _, obj in ipairs(Scene.gameScenes[Scene.currentScene].objects) do
                 if obj.__draw and obj.visible then
-                    love.graphics.print("anus", 32, 32)
                     obj:__draw()
                 end
                 --[[if obj.children then
@@ -120,7 +119,7 @@ function Scene.draw()
                     end
                 end--]]
             end
-        --Scene.camera:stop()
+        Scene.camera:stop()
     end
     --love.graphics.setScissor(unpack(oldScissor))
 end

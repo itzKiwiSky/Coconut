@@ -2,7 +2,7 @@ local LUXASSETS = (...):match('(.-)[^/]+$')
 
 local Font = class:extend("Font")
 
-function Font:new(path)
+function Font:__construct(path)
     self.path = path or LUXASSETS .. "/fredoka_regular.ttf"
 end
 

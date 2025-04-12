@@ -81,14 +81,16 @@ function Lux2D.init(config)
         Lux2D.Components[components[c]:match("[^/]+$"):gsub(".lua", "")] = require(comp:gsub("/", "%."))
     end
 
-    Lux2D.push.setupScreen(conf.width, conf.height, { upscale = conf.antialiasing and "normal" or "pixel-perfect" })
+    Lux2D.push.setupScreen(conf.width, conf.height, { upscale = conf.antialiasing and "normal" or "pixel-perfect", canvas = true })
     
     Lux2D.engine.width = Lux2D.push.getWidth()
     Lux2D.engine.height = Lux2D.push.getHeight()
 
     -- create a default scene --
-    Lux2D.scene.newScene(conf.scene, function() end)
-    Lux2D.scene.switchScene(conf.scene)
+    if not Lux2D.scene.gameScenes[conf.scene] then
+        Lux2D.scene.newScene(conf.scene, function() end)
+        Lux2D.scene.switchScene(conf.scene)
+    end
 
     love.window.setTitle(conf.title)
     love.filesystem.setIdentity(conf.packageid)

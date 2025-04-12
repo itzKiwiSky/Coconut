@@ -15,6 +15,21 @@ function table.push(t, ...)
     return ...
 end
 
+function table.pop(t)
+    return table.remove(t)
+end
+
+function table.unshift(t, ...)
+    local n = select("#", ...)
+    for i = n, 1, -1 do
+        table.insert(t, 1, select(i, ...))
+    end
+    return ...
+end
+
+function table.shift(t)
+    return table.remove(t, 1)
+end
 
 function table.concatf(tbl, sep, transform)
     sep = sep or ""

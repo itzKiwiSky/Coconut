@@ -30,6 +30,7 @@ lux.scene.newScene("idea", function(scene)
     
 
     obj:centerOrigin()
+    obj:center()
 
     scene.add(obj)
 

@@ -6,7 +6,7 @@ local assets = import 'utils.AssetPool'
 return function(...)
     local DrawableComponent = {
         drawable = assets.get(assets.AssetType.IMAGE, "logo"),
-        scale = vec2.ZERO(),
+        scale = vec2:new(1, 1),
         origin = vec2.ZERO(),
         shear = vec2.ZERO(),
         rotation = 0,
@@ -32,7 +32,7 @@ return function(...)
 
     function DrawableComponent:centerOrigin()
         local dw, dh = self.drawable:getDimensions()
-        self.origin = vec2(dw / 2, dh / 2)
+        self.origin = vec2:new(dw / 2, dh / 2)
     end
 
     return DrawableComponent

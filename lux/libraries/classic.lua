@@ -11,59 +11,51 @@
 local Object = {}
 Object.__index = Object
 
-
-function Object:new()
-end
-
+function Object:__construct()end
 
 function Object:extend(class)
-  local cls = {}
-  for k, v in pairs(self) do
-    if k:find("__") == 1 then
-      cls[k] = v
+    local cls = {}
+    for k, v in pairs(self) do
+        if k:find("__") == 1 then
+        cls[k] = v
+        end
     end
-  end
-  cls.__index = cls
-  cls.super = self
-  cls.type = class or "Object"
-  setmetatable(cls, self)
-  return cls
+    cls.__index = cls
+    cls.super = self
+    cls.type = class or "Object"
+    setmetatable(cls, self)
+    return cls
 end
-
 
 function Object:implement(...)
-  for _, cls in pairs({...}) do
-    for k, v in pairs(cls) do
-      if self[k] == nil and type(v) == "function" then
-        self[k] = v
-      end
+    for _, cls in pairs({...}) do
+        for k, v in pairs(cls) do
+            if self[k] == nil and type(v) == "function" then
+                self[k] = v
+            end
+        end
     end
-  end
 end
-
 
 function Object:is(T)
-  local mt = getmetatable(self)
-  while mt do
-    if mt == T then
-      return true
+    local mt = getmetatable(self)
+    while mt do
+        if mt == T then
+        return true
+        end
+        mt = getmetatable(mt)
     end
-    mt = getmetatable(mt)
-  end
-  return false
+    return false
 end
-
 
 function Object:__tostring()
-  return self.type
+    return self.type
 end
 
-
-function Object:__call(...)
-  local obj = setmetatable({}, self)
-  obj:new(...)
-  return obj
+function Object:new(...)
+    local obj = setmetatable({}, self)
+    obj:__construct(...)
+    return obj
 end
-
 
 return Object

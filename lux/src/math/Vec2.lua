@@ -3,7 +3,7 @@ local sqrt, cos, sin, atan2 = math.sqrt, math.cos, math.sin, math.atan2
 
 local Vec2 = class:extend("Vec2")
 
-function Vec2:new(x, y)
+function Vec2:__construct(x, y)
     self.epsilon = 1e-6
     if type(x) == "table" and y == nil then
         self.x = x[1] or x.x or 0
@@ -23,31 +23,31 @@ local function isVector(v)
 end
 
 function Vec2.ZERO()
-    return Vec2(0, 0)
+    return Vec2:new(0, 0)
 end
 
 function Vec2.ONE()
-    return Vec2(1, 1)
+    return Vec2:new(1, 1)
 end
 
 function Vec2.LEFT()
-    return Vec2(-1, 0)
+    return Vec2:new(-1, 0)
 end
 
 function Vec2.RIGHT()
-    return Vec2(1, 0)
+    return Vec2:new(1, 0)
 end
 
 function Vec2.UP()
-    return Vec2(0, -1)
+    return Vec2:new(0, -1)
 end
 
 function Vec2.DOWN()
-    return Vec2(0, 1)
+    return Vec2:new(0, 1)
 end
 
 function Vec2:clone(vec)
-    return Vec2(vec:unpack())
+    return Vec2:new(vec:unpack())
 end
 
 function Vec2:unpack()
