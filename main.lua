@@ -1,4 +1,4 @@
-local lux = require 'lux'
+local kiwi = require 'kiwi'
 local lust = nil
 
 if love.arg.parseGameArguments(arg)[1] == "--test" then
@@ -10,31 +10,30 @@ if love.arg.parseGameArguments(arg)[1] == "--test" then
         local t = require((test:gsub("/", ".")):gsub("%.lua", ""))
         t({
             lust = lust,
-            lux = lux
+            kiwi = kiwi
         })
     end
 end
 
-lux.init({debug = true})
+kiwi.init({debug = true})
 
-lux.scene.newScene("idea", function(scene)
-    local obj = lux.object({
-        lux.Components.Transform,
-        lux.Components.Drawable,
+kiwi.scene.newScene("idea", function(scene)
+    local obj = kiwi.object({
+        kiwi.Components.Transform,
+        kiwi.Components.Drawable,
     })
     
-    local text = lux.object({
-        lux.Components.Transform,
-        lux.Components.Text,
+    local text = kiwi.object({
+        kiwi.Components.Transform,
+        kiwi.Components.Text,
     })
-    
 
+
+    obj.scale = kiwi.Vec2:new(0.32)
     obj:centerOrigin()
     obj:center()
 
     scene.add(obj)
-
-    print(inspect(lux.scene.gameScenes["idea"]))
 end)
 
-lux.scene.switchScene("idea")
+kiwi.scene.switchScene("idea")

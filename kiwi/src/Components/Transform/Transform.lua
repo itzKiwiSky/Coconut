@@ -7,7 +7,7 @@ return function()
         z = 0,
     }
 
-    function TransformComponent:center(this)
+    function TransformComponent:center()
         self.pos.x, self.pos.y = Engine.width / 2, Engine.height / 2
     end
 

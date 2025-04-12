@@ -60,9 +60,9 @@ function Scene.newScene(name, def)
 
     if type(def) == "string" then
         local fn, err = pcall(love.filesystem.load, def)
-        assert(err == nil, "[Lux2DError] : Error found while loading script: " .. err)
+        assert(err == nil, "[Kiwi2DError] : Error found while loading script: " .. err)
         local fndata, err = pcall(fn)
-        assert(err == nil, "[Lux2DError] : Uncaught error found while loading a script]")
+        assert(err == nil, "[Kiwi2DError] : Uncaught error found while loading a script]")
 
         scenedef.def = fndata
 
@@ -74,7 +74,7 @@ function Scene.newScene(name, def)
 end
 
 function Scene.switchScene(name)
-    assert(Scene.gameScenes[name], "[Lux2DError] : Scene not found " .. name)
+    assert(Scene.gameScenes[name], "[Kiwi2DError] : Scene not found " .. name)
     Engine.onSceneEnter:trigger(name)
     for _, obj in ripairs(Scene.gameScenes[name]) do
         if not obj.stay then
