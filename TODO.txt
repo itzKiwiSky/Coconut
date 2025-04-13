@@ -1,0 +1,18 @@
+[0.0.1]
+
+[.] Components
+    [.] stay component
+    [.] fixed camera component
+    [.] Drawable component
+        [.] Animation Support
+
+[.] Input
+    [.] Get keyboard input
+    [.] Get mouse input
+
+[.] Asset pool
+    [.] recycle assets
+    [.] loader
+
+[.] Misc
+    [.] Splash screen
