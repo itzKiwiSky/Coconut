@@ -1,0 +1,12 @@
+[0.0.1]
+
+[.] Components
+    [.] stay component
+    [.] fixed camera component
+
+[.] Input
+    [.] Get input
+
+[.] Events
+    [.] Event pool
+    [.] Event runner

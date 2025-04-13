@@ -15,19 +15,13 @@ if love.arg.parseGameArguments(arg)[1] == "--test" then
     end
 end
 
-kiwi.init({debug = true})
+kiwi.init({ debug = true })
 
 kiwi.scene.newScene("idea", function(scene)
     local obj = kiwi.object({
         kiwi.Components.Transform,
         kiwi.Components.Drawable,
     })
-    
-    local text = kiwi.object({
-        kiwi.Components.Transform,
-        kiwi.Components.Text,
-    })
-
 
     obj.scale = kiwi.Vec2:new(0.32)
     obj:centerOrigin()

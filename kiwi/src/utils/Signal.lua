@@ -10,10 +10,6 @@ function Signal:__construct()
     self.cancelled = {}
 end
 
-function Signal:type()
-    return self
-end
-
 ---
 --- Connects a listener function to this signal.
 ---
