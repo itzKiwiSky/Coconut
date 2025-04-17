@@ -1,12 +1,12 @@
-local LPASSETS = (...):match('(.-)[^/]+$')
 local vec2 = import 'Math.Vec2'
 local Color = import 'Utils.Color'
 local assets = import 'utils.AssetPool'
 
 return function()
-    ---@class Loveplay.Components.TextRendererComponent
+    ---@class coconut.components.TextRendererComponent
     local TextRendererComponent = {}
 
+    ---@enum
     TextRendererComponent.Alignment = { LEFT = "left", CENTER = "center", RIGHT = "right" }
 
     TextRendererComponent.font = assets.get(assets.AssetType.FONT, "fredoka", { fontsize = 25 })

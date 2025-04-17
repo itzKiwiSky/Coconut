@@ -39,6 +39,7 @@ function Scene:add(obj)
     --self.objects[objID] = obj
     --table.insert(self.objects, objID, obj)
     self.objects[#self.objects + 1] = obj
+    self.onSceneObjectAdded()
     --table.insert(self.objects, obj)
 end
 

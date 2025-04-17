@@ -54,6 +54,8 @@ function AssetPool.get(type, tag, args)
                     AssetPool.fonts.cache[tag .. "-" .. args.fontsize] = AssetPool.fonts.paths[tag]:makeFont(args.fontsize)
                     return AssetPool.fonts.cache[tag .. "-" .. args.fontsize]
                 end
+            else
+                error("[CoconutError] Can't find font asset named: " .. tag)
             end
         end,
         [AssetPool.AssetType.IMAGE] = function()
@@ -90,11 +92,23 @@ function AssetPool.addData(tag, data)
 end
 
 function AssetPool.resetPool()
+    for _, audio in ipairs(AssetPool.audios) do
+        audio:release()
+    end
     table.clear(AssetPool.audios)
+    for _, img in ipairs(AssetPool.images) do
+        img:release()
+    end
     table.clear(AssetPool.images)
+    for _, shd in ipairs(AssetPool.shaders) do
+        shd:release()
+    end
     table.clear(AssetPool.shaders)
+    for _, font in ipairs(AssetPool.fonts.cache) do
+        font:release()
+    end
     table.clear(AssetPool.fonts.cache)
-    table.clear(AssetPool.fonts.cache)
+    table.clear(AssetPool.fonts.paths)
     table.clear(AssetPool.data.binary)
     table.clear(AssetPool.data.text)
 end

@@ -1,7 +1,7 @@
 local coconut = require 'coconut'
 local fsutil = require 'tests.Libraries.FSUtil'
 local lust = nil
-coconut.init()
+coconut.init({debug = true})
 
 if love.arg.parseGameArguments(arg)[1] == "--test" then
     lust = require 'tests.Libraries.lust'
@@ -47,8 +47,6 @@ function love.keypressed(k)
             canChangeDemo = true
         end
     end
-
-    print(currentDemo)
 
     if canChangeDemo then
         coconut.reset()

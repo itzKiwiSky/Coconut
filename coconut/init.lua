@@ -31,6 +31,7 @@ Coconut.Components = {}
 Coconut.Assets = import 'utils.AssetPool'
 
 -- API --
+Coconut.Debug = import 'utils.Log'
 Coconut.Scene = import 'core.Scene'
 Coconut.Engine = import 'Engine'
 Coconut.Object = import 'core.Object'
@@ -42,9 +43,6 @@ function Coconut.init(config)
     assert(Coconut.initialized == false, "[CoconutRuntimeError] : Coconut is already initialized")
 
     Coconut.Assets.resetPool()
-
-    Coconut.Assets.addImage("logo", COCONUT_PATH .. "/assets/images/icon.png")
-    Coconut.Assets.addFont("fredoka", COCONUT_PATH .. "/assets/fonts/fredoka_regular.ttf")
 
     -- load configs --
     config = config or {}
@@ -72,6 +70,10 @@ function Coconut.init(config)
         conf.antialiasing and "linear" or "nearest",
         conf.antialiasing and "linear" or "nearest"
     )
+
+    Coconut.Assets.addImage("logo", COCONUT_PATH .. "/assets/images/icon.png")
+    Coconut.Assets.addFont("fredoka", COCONUT_PATH .. "/assets/fonts/fredoka_regular.ttf")
+    Coconut.Debug.setFont(Coconut.Assets.get(Coconut.Assets.AssetType.FONT, "fredoka", { fontsize = 18 }))
 
     -- load components --
     local components = fsutil.scanFolder(COCONUT_PATH .. "/src/Components")
@@ -166,11 +168,19 @@ function Coconut.init(config)
                 love.graphics.rectangle("fill", 0, 0, fpsfont:getWidth("FPS: " .. love.timer.getFPS()) + 10, fpsfont:getHeight() + 10, 5)
             love.graphics.setColor(1, 1, 1, 1)
             love.graphics.print("FPS: " .. love.timer.getFPS(), fpsfont, 5, 5)
+
+            if Coconut.Args.debug then
+                Coconut.Debug.draw()
+            end
         _push.finish()
     end
 
     love.update = function(elapsed)
         Coconut.Scene.update(elapsed)
+
+        if Coconut.Args.debug then
+            Coconut.Debug.update(elapsed)
+        end
     end
 
     love.errorhandler = function(msg)
@@ -311,6 +321,7 @@ function Coconut.init(config)
 
     love.quit = function()
         print("[CoconutRuntime] Freed assets from pool")
+        Coconut.Assets.resetPool()
     end
 end
 
