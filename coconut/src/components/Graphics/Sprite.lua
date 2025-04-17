@@ -35,5 +35,9 @@ return function(...)
         self.origin = vec2:new(dw / 2, dh / 2)
     end
 
+    if self.isDataHolder then
+        error("[CoconutComponent] Can't add other components inside a dataholder component")
+    end
+
     return SpriteComponent
 end

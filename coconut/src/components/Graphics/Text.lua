@@ -38,5 +38,9 @@ return function()
         TextRendererComponent.font = assets.get(assets.AssetType.FONT, name, { fontsize = size })
     end
 
+    if self.isDataHolder then
+        error("[CoconutComponent] Can't add other components inside a dataholder component")
+    end
+
     return TextRendererComponent
 end

@@ -5,6 +5,7 @@ local Color = import 'Utils.Color'
 return function()
     local RectangleShapeComponent = {}
     table.deepmerge(RectangleShapeComponent, ShapeRenderer())
+    local shapeDraw = RectangleShapeComponent.__draw
 
     RectangleShapeComponent.size = {
         w = 32,
@@ -20,8 +21,6 @@ return function()
         }
     end
 
-    local shapeDraw = RectangleShapeComponent.__draw
-
     function RectangleShapeComponent:__draw()
         self.verts = {
             self.pos.x, self.pos.y,
@@ -31,6 +30,10 @@ return function()
         }
         -- super --
         shapeDraw(self)
+    end
+
+    if self.isDataHolder then
+        error("[CoconutComponent] Can't add other components inside a dataholder component")
     end
 
     return RectangleShapeComponent

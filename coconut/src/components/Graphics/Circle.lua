@@ -45,5 +45,9 @@ return function()
         CircleShapeComponent:__super()
     end
 
+    if self.isDataHolder then
+        error("[CoconutComponent] Can't add other components inside a dataholder component")
+    end
+
     return CircleShapeComponent
 end

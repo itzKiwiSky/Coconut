@@ -19,5 +19,9 @@ return function()
         self.pos.y = Engine.height / 2
     end
 
+    if self.isDataHolder then
+        error("[CoconutComponent] Can't add other components inside a dataholder component")
+    end
+
     return TransformComponent
 end
