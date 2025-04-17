@@ -89,4 +89,14 @@ function AssetPool.addData(tag, data)
     
 end
 
+function AssetPool.resetPool()
+    table.clear(AssetPool.audios)
+    table.clear(AssetPool.images)
+    table.clear(AssetPool.shaders)
+    table.clear(AssetPool.fonts.cache)
+    table.clear(AssetPool.fonts.cache)
+    table.clear(AssetPool.data.binary)
+    table.clear(AssetPool.data.text)
+end
+
 return AssetPool

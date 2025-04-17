@@ -7,12 +7,12 @@ return function()
     ---@class Loveplay.Components.TextRendererComponent
     local TextRendererComponent = {}
 
-    TextRendererComponent.ALIGNMENT = { LEFT = "left", CENTER = "center", RIGHT = "right" }
+    TextRendererComponent.Alignment = { LEFT = "left", CENTER = "center", RIGHT = "right" }
 
     TextRendererComponent.font = assets.get(assets.AssetType.FONT, "fredoka", { fontsize = 25 })
     TextRendererComponent.text = ""
-    TextRendererComponent.color = Color.BLACK
-    TextRendererComponent.align = TextRendererComponent.ALIGNMENT.CENTER
+    TextRendererComponent.color = Color.WHITE
+    TextRendererComponent.align = TextRendererComponent.Alignment.CENTER
     TextRendererComponent.offsetPos = vec2.ZERO()
     TextRendererComponent.textLimit = 128
     TextRendererComponent.shadow = false

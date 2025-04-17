@@ -11,5 +11,13 @@ return function()
         self.pos.x, self.pos.y = Engine.width / 2, Engine.height / 2
     end
 
+    function TransformComponent:centerX()
+        self.pos.x = Engine.width / 2
+    end
+
+    function TransformComponent:centerY()
+        self.pos.y = Engine.height / 2
+    end
+
     return TransformComponent
 end

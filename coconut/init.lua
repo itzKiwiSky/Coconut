@@ -25,11 +25,10 @@ _push = require(COCONUT_PATH .. "libraries.push")
 _event = require(COCONUT_PATH .. "libraries.event")
 
 Coconut.initialized = false
+Coconut.Args = {}
 
 Coconut.Components = {}
 Coconut.Assets = import 'utils.AssetPool'
-Coconut.Assets.addImage("logo", COCONUT_PATH .. "/assets/images/icon.png")
-Coconut.Assets.addFont("fredoka", COCONUT_PATH .. "/assets/fonts/fredoka_regular.ttf")
 
 -- API --
 Coconut.Scene = import 'core.Scene'
@@ -41,6 +40,11 @@ Coconut.Color = import 'utils.Color'
 
 function Coconut.init(config)
     assert(Coconut.initialized == false, "[CoconutRuntimeError] : Coconut is already initialized")
+
+    Coconut.Assets.resetPool()
+
+    Coconut.Assets.addImage("logo", COCONUT_PATH .. "/assets/images/icon.png")
+    Coconut.Assets.addFont("fredoka", COCONUT_PATH .. "/assets/fonts/fredoka_regular.ttf")
 
     -- load configs --
     config = config or {}
@@ -61,6 +65,8 @@ function Coconut.init(config)
         antialiasing = config.antialiasing or false,
         extensions = config.extensions or {}
     }
+
+    Coconut.Args = conf
 
     love.graphics.setDefaultFilter(
         conf.antialiasing and "linear" or "nearest",
@@ -89,7 +95,7 @@ function Coconut.init(config)
     
     Coconut.Engine.width =  _push.getWidth()
     Coconut.Engine.height = _push.getHeight()
-
+    
     love.window.setTitle(conf.title)
     love.filesystem.setIdentity(conf.packageid)
 
@@ -98,7 +104,7 @@ function Coconut.init(config)
 
     Coconut.Scene.switch(conf.scene)
 
-    local fpsfont = Coconut.Assets.get(Coconut.Assets.AssetType.FONT, "fredoka", { fontsize = 18 })
+    local fpsfont = love.graphics.newFont(COCONUT_PATH .. "/assets/fonts/fredoka_regular.ttf", 18)
 
     love.run = function()
         love._FPSCap = conf.fpscap
@@ -177,6 +183,8 @@ function Coconut.init(config)
 
         local msg = tostring(msg)
 
+        error_printer(msg, 2)
+
         -- dont allow rendering the error screen if these events are disabled --
         if not love.window or not love.graphics or not love.event then
             return
@@ -189,8 +197,6 @@ function Coconut.init(config)
                 return
             end
         end
-
-        -- reset state --
 
             -- Reset state.
         if love.mouse then
@@ -302,6 +308,15 @@ function Coconut.init(config)
             end
         end
     end
+
+    love.quit = function()
+        print("[CoconutRuntime] Freed assets from pool")
+    end
+end
+
+function Coconut.reset()
+    Coconut.initialized = false
+    Coconut.init(Coconut.Args)
 end
 
 return Coconut

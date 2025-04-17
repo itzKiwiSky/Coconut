@@ -1,10 +1,10 @@
 local coconut = require 'coconut'
+local fsutil = require 'tests.Libraries.FSUtil'
 local lust = nil
 coconut.init()
 
 if love.arg.parseGameArguments(arg)[1] == "--test" then
     lust = require 'tests.Libraries.lust'
-    local fsutil = require 'tests.Libraries.FSUtil'
 
     local tests = fsutil.scanFolder("tests/specs")
     for _, test in ipairs(tests) do
@@ -14,22 +14,45 @@ if love.arg.parseGameArguments(arg)[1] == "--test" then
             coconut = coconut
         })
     end
+
+    return
 end
 
-local cena = coconut.Scene.newScene("roger")
+local demospaths = fsutil.scanFolder("demos")
+local demos = {}
+local currentDemo = 1
 
-function cena.onSceneEnter()
-    local obj = coconut.Object({
-        coconut.Components.Transform,
-        coconut.Components.Sprite,
-    })
-
-    obj:centerOrigin()
-    obj:center()
-    obj.scale.x = 0.5
-    obj.scale.y = 0.5
-    
-    cena:add(obj)
+for _, demofile in ipairs(demospaths) do
+    local file = require((demofile:gsub("/", ".")):gsub("%.lua", ""))
+    table.insert(demos, file)
 end
 
-coconut.Scene.switch("roger")
+demos[currentDemo](coconut)
+local canChangeDemo = false
+local coconutKeyPressed = love.keypressed
+
+function love.keypressed(k)
+    if coconutKeyPressed then
+        coconutKeyPressed(k)
+    end
+    if k == "pageup" then
+        if currentDemo < #demos then
+            currentDemo = currentDemo + 1
+            canChangeDemo = true
+        end
+    end
+    if k == "pagedown" then
+        if currentDemo > 1 then
+            currentDemo = currentDemo - 1
+            canChangeDemo = true
+        end
+    end
+
+    print(currentDemo)
+
+    if canChangeDemo then
+        coconut.reset()
+        demos[currentDemo](coconut)
+        canChangeDemo = false
+    end
+end
