@@ -21,20 +21,18 @@ return function(coconut)
     
         myFirstObject:centerOrigin()
         myFirstObject:center()
-        myFirstObject.scale.x = 0.5
-        myFirstObject.scale.y = 0.5
+        myFirstObject.scale.x = 0.25
+        myFirstObject.scale.y = 0.25
 
         scene:add(text)
         scene:add(myFirstObject)
     end
 
     function scene.onMousepressed(x, y, button)
-        print(x, y, button)
         if button == 1 then
             myFirstObject.pos.x = x
             myFirstObject.pos.y = y
         end
-        
     end
 
     coconut.Scene.switch("myScene")

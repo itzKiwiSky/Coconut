@@ -38,7 +38,6 @@ Coconut.Object = import 'core.Object'
 Coconut.Vec2 = import 'math.Vec2'
 Coconut.Math = import 'math.Math'
 Coconut.Color = import 'utils.Color'
-Coconut.Event = import 'utils.Event'
 
 function Coconut.init(config)
     assert(Coconut.initialized == false, "[CoconutRuntimeError] : Coconut is already initialized")
