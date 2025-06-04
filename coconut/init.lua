@@ -38,9 +38,12 @@ Coconut.Object = import 'core.Object'
 Coconut.Vec2 = import 'math.Vec2'
 Coconut.Math = import 'math.Math'
 Coconut.Color = import 'utils.Color'
+Coconut.Event = import 'utils.Event'
 
 function Coconut.init(config)
     assert(Coconut.initialized == false, "[CoconutRuntimeError] : Coconut is already initialized")
+
+    --Coconut.Event.regis
 
     Coconut.Assets.resetPool()
 
@@ -122,7 +125,7 @@ function Coconut.init(config)
         return function()
             if love.event then
                 love.event.pump()
-                for name, a,b,c,d,e,f in love.event.poll() do
+                for name,a,b,c,d,e,f in love.event.poll() do
                     if name == "quit" then
                         if not love.quit or not love.quit() then
                             return a or 0
@@ -133,6 +136,7 @@ function Coconut.init(config)
 
                     -- process other events --
                     love.handlers[name](a,b,c,d,e,f)
+                    Coconut.Scene.processEvents({ name, a, b, c, d, e, f })
                 end
             end
 

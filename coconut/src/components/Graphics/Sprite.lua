@@ -4,6 +4,8 @@ local Color = import 'Utils.Color'
 local assets = import 'utils.AssetPool'
 
 return function(...)
+
+    ---@class coconut.components.graphics.SpriteComponent
     local SpriteComponent = {
         drawable = assets.get(assets.AssetType.IMAGE, "logo"),
         scale = vec2:new(1, 1),
@@ -12,6 +14,12 @@ return function(...)
         rotation = 0,
         color = Color.WHITE,
     }
+
+    function SpriteComponent:__init()
+        if self.isDataHolder then
+            error("[CoconutComponent] Can't add other components inside a dataholder component")
+        end
+    end
 
     function SpriteComponent:__draw()
         if not self then
@@ -33,10 +41,6 @@ return function(...)
     function SpriteComponent:centerOrigin()
         local dw, dh = self.drawable:getDimensions()
         self.origin = vec2:new(dw / 2, dh / 2)
-    end
-
-    if self.isDataHolder then
-        error("[CoconutComponent] Can't add other components inside a dataholder component")
     end
 
     return SpriteComponent

@@ -6,6 +6,12 @@ return function()
     ---@class coconut.components.TextRendererComponent
     local TextRendererComponent = {}
 
+    function TextRendererComponent:__init()
+        if self.isDataHolder then
+            error("[CoconutComponent] Can't add other components inside a dataholder component")
+        end
+    end
+
     ---@enum
     TextRendererComponent.Alignment = { LEFT = "left", CENTER = "center", RIGHT = "right" }
 
@@ -36,10 +42,6 @@ return function()
 
     function TextRendererComponent:setFont(name, size)
         TextRendererComponent.font = assets.get(assets.AssetType.FONT, name, { fontsize = size })
-    end
-
-    if self.isDataHolder then
-        error("[CoconutComponent] Can't add other components inside a dataholder component")
     end
 
     return TextRendererComponent

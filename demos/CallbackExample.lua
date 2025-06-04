@@ -2,13 +2,15 @@ return function(coconut)
     local scene = coconut.Scene.newScene("myScene")
     local myFirstObject
 
+    print(inspect(scene))
+
     function scene.onSceneEnter()
         local text = coconut.Object({
             coconut.Components.Transform,
             coconut.Components.Text
         })
     
-        text.text = "We are waving"
+        text.text = "We are callbacking"
         text.align = text.Alignment.CENTER
         text.textLimit = coconut.Engine.width
     
@@ -26,8 +28,13 @@ return function(coconut)
         scene:add(myFirstObject)
     end
 
-    function scene.onSceneUpdate()
-        myFirstObject.pos.y = coconut.Math.wave(128, coconut.Engine.height - 256, love.timer.getTime() * 3)
+    function scene.onMousepressed(x, y, button)
+        print(x, y, button)
+        if button == 1 then
+            myFirstObject.pos.x = x
+            myFirstObject.pos.y = y
+        end
+        
     end
 
     coconut.Scene.switch("myScene")

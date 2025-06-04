@@ -36,6 +36,10 @@ return function()
     
 
     function CircleShapeComponent:__init()
+        if self.isDataHolder then
+            error("[CoconutComponent] Can't add other components inside a dataholder component")
+        end
+
         self.verts = CreateCirclePolygon(CircleShapeComponent.segments, CircleShapeComponent.radius, self.pos.x, self.pos.y)
     end
 
@@ -43,10 +47,6 @@ return function()
         self.verts = CreateCirclePolygon(CircleShapeComponent.segments, CircleShapeComponent.radius, self.pos.x, self.pos.y)
         -- super --
         CircleShapeComponent:__super()
-    end
-
-    if self.isDataHolder then
-        error("[CoconutComponent] Can't add other components inside a dataholder component")
     end
 
     return CircleShapeComponent

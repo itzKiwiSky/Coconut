@@ -2,10 +2,17 @@ return function()
     local Engine = import 'Engine'
     local vec2 = import 'Math.Vec2'
 
+    ---@class coconut.components.TransformComponent
     local TransformComponent = {
         pos = vec2.ZERO(),
         z = 0,
     }
+
+    function TransformComponent:__init()
+        if self.isDataHolder then
+            error("[CoconutComponent] Can't add other components inside a dataholder component")
+        end
+    end
 
     function TransformComponent:center()
         self.pos.x, self.pos.y = Engine.width / 2, Engine.height / 2
@@ -17,10 +24,6 @@ return function()
 
     function TransformComponent:centerY()
         self.pos.y = Engine.height / 2
-    end
-
-    if self.isDataHolder then
-        error("[CoconutComponent] Can't add other components inside a dataholder component")
     end
 
     return TransformComponent

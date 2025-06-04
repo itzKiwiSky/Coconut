@@ -113,6 +113,27 @@ function table.deepmerge(target, source)
     return target
 end
 
+function table.merge(...)
+    local getiter = function(x)
+        if type(x) == "table" and x[1] ~= nil then
+            return ipairs
+        elseif type(x) == "table" then
+            return pairs
+        end
+        error("expected table", 3)
+    end
+
+    local rtn = {}
+    for i = 1, select("#", ...) do
+        local t = select(i, ...)
+        local iter = getiter(t)
+        for k, v in iter(t) do
+            rtn[k] = v
+        end
+    end
+    return rtn
+end
+
 function table.indexOf(table, element)
     for index, elem in ipairs(table) do
         if elem == element then

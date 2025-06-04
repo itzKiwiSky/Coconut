@@ -13,6 +13,10 @@ return function()
     }
 
     function RectangleShapeComponent:__init()
+        if self.isDataHolder then
+            error("[CoconutComponent] Can't add other components inside a dataholder component")
+        end
+
         self.verts = {
             self.pos.x, self.pos.y,
             self.pos.x + RectangleShapeComponent.size.w, self.pos.y,
@@ -30,10 +34,6 @@ return function()
         }
         -- super --
         shapeDraw(self)
-    end
-
-    if self.isDataHolder then
-        error("[CoconutComponent] Can't add other components inside a dataholder component")
     end
 
     return RectangleShapeComponent

@@ -57,7 +57,7 @@ end
 
 ---@protected
 function Log.draw() 
-    local startY = _push.getHeight() - logFont:getHeight() - 10
+    local startY = _push.getWidth() - logFont:getHeight() - 10
     for idx, line in ripairs(Log.data) do
         if idx <= Log.maxLogLineDisplay then
             local textWidth = logFont:getWidth(line.text) + 10
@@ -85,7 +85,7 @@ function Log.update(elapsed)
 
         if line.meta.lifetime <= 0.4 then
             if line.color[4] > 0 then
-                line.color[4] = line.color[4] - 6 * elapsed
+                line.color[4] = line.color[4] - elapsed
             else
                 table.remove(Log.data, idx)
             end

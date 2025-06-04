@@ -1,6 +1,5 @@
 local Color = import 'utils.Color'
 local Engine = import 'Engine'
-local Events = import 'Event'
 local Camera = import 'core.Camera'
 
 local function null()end
@@ -13,7 +12,25 @@ local events = {
     "onSceneLeave",
     "onSceneUpdate",
     "onSceneObjectAdded",
+
+    "keypressed",
+    "keyreleased",
+    "mousepressed",
+    "mousereleased",
+    "mousemoved",
+    "mousescrolled",
+    "textinput",
+    "joystickadded",
+    "joystickremoved",
+    "joystickpressed",
+    "joystickreleased",
+    "joystickaxis"
 }
+
+local LoveEvents = {
+
+}
+
 
 function Scene:__construct()
     self.camera = {
@@ -24,23 +41,35 @@ function Scene:__construct()
     self.meta = {}
     self.meta.background = Color.TRANSPARENT
 
-    for e = 1, #events, 1 do
-        self[events[e]] = null
-    end
+    --self = table.merge(self, Event:new())
+    --print(inspect(Event:new(self)))
 
-    _event.hook(self, events)
+    --print(inspect(Event:new()))
+
+    -- how can I call the event class without overriding this class itself?
+
 
     self.objects = {}
+
+    --for _, event in ipairs(LoveEvents) do
+        --Scene["on" .. event:gsub("^%l", string.upper)] = function()end
+    --end
+    
+    for _, e in ipairs(events) do
+        self[e] = null
+    end
+    --self = table.deepmerge(self, Event:new())
+
+    --print(inspect(self))
+
+    self:onSceneLoad()
 end
 
 function Scene:add(obj)
     local objID = #self.objects + 1
     obj.id = objID
-    --self.objects[objID] = obj
-    --table.insert(self.objects, objID, obj)
     self.objects[#self.objects + 1] = obj
     self.onSceneObjectAdded()
-    --table.insert(self.objects, obj)
 end
 
 function Scene:draw()
@@ -121,6 +150,7 @@ end
 ---@param name string
 function SceneManager.switch(name)
     assert(SceneManager.gameScenes[name], "[CoconutRuntimeError] : Scene not found " .. name)
+    --print(inspect(SceneManager.gameScenes[SceneManager.currentScene]))
     SceneManager.gameScenes[SceneManager.currentScene]:onSceneLeave()
     SceneManager.gameScenes[SceneManager.currentScene]:destroyAll()
 
@@ -149,6 +179,15 @@ end
 function SceneManager.update(elapsed)
     SceneManager.gameScenes[SceneManager.currentScene]:collectDestroyedObjects()
     SceneManager.gameScenes[SceneManager.currentScene]:update(elapsed)
+end
+
+function SceneManager.processEvents(event)
+    local eventName = "on" .. event[1]:gsub("^%l", string.upper)
+    --print("[CoconutRuntime] Processing event: " .. eventName)
+    table.remove(event, 1) -- remove the event name from the table
+    if SceneManager.gameScenes[SceneManager.currentScene][eventName] then
+        SceneManager.gameScenes[SceneManager.currentScene][eventName](unpack(event))
+    end
 end
 
 return SceneManager

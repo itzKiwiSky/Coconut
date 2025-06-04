@@ -15,6 +15,8 @@ if love.arg.parseGameArguments(arg)[1] == "--test" then
         })
     end
 
+    love.event.quit()
+
     return
 end
 

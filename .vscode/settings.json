@@ -21,7 +21,9 @@
         "undefined-doc-param",
         "inject-field",
         "missing-parameter",
-        "need-check-nil"
+        "need-check-nil",
+        "unused-local",
+        "ambiguity-1",
     ],
     "Lua.completion.autoRequire": false
 }
