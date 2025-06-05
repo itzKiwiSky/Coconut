@@ -3,10 +3,17 @@ local fsutil = require 'tests.Libraries.FSUtil'
 local lust = nil
 coconut.init({debug = true})
 
+-- run the tests and close itself
 if love.arg.parseGameArguments(arg)[1] == "--test" then
     lust = require 'tests.Libraries.lust'
 
     local tests = fsutil.scanFolder("tests/specs")
+
+    if #tests <= 0 then
+        print("[LOVE] No tests to run")
+        love.event.quit()
+    end
+
     for _, test in ipairs(tests) do
         local t = require((test:gsub("/", ".")):gsub("%.lua", ""))
         t({
@@ -20,6 +27,7 @@ if love.arg.parseGameArguments(arg)[1] == "--test" then
     return
 end
 
+-- demo showcase stuff --
 local demospaths = fsutil.scanFolder("demos")
 local demos = {}
 local currentDemo = 1

@@ -2,7 +2,7 @@ local Color = import 'utils.Color'
 local Signal = import 'utils.Signal'
 
 ---
---- @class kiwi.Engine
+--- @class Coconut.Engine
 ---
 local Engine = {}
 

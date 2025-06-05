@@ -84,11 +84,11 @@ function Log.update(elapsed)
         line.meta.lifetime = line.meta.lifetime - elapsed
 
         if line.meta.lifetime <= 0.4 then
-            if line.color[4] > 0 then
+            if line.color[4] < 0 then
                 line.color[4] = line.color[4] - elapsed
-            else
-                table.remove(Log.data, idx)
+                return
             end
+            table.remove(Log.data, idx)
         end
     end
 end

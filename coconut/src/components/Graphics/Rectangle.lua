@@ -7,16 +7,13 @@ return function()
     table.deepmerge(RectangleShapeComponent, ShapeRenderer())
     local shapeDraw = RectangleShapeComponent.__draw
 
+    ---@class coconut.components.RectangleShapeComponent
     RectangleShapeComponent.size = {
         w = 32,
         h = 32
     }
 
-    function RectangleShapeComponent:__init()
-        if self.isDataHolder then
-            error("[CoconutComponent] Can't add other components inside a dataholder component")
-        end
-
+    function RectangleShapeComponent:__onMount()
         self.verts = {
             self.pos.x, self.pos.y,
             self.pos.x + RectangleShapeComponent.size.w, self.pos.y,

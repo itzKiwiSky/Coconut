@@ -5,8 +5,7 @@ return function(components)
     self.parent = nil
     self.children = {}
     self.tags = {}
-    self.destroyed = false
-
+    self.destroy = false
 
     local meta = { __index = {} }
     for _, component in ipairs(components) do
@@ -18,6 +17,7 @@ return function(components)
                 if type(v) == "function" then
                     meta.__index[k] = v
                 else
+                    
                     if not self[k] then
                         self[k] = self[k] or v
                     else
@@ -32,8 +32,6 @@ return function(components)
         end
     end
 
-    print(inspect(meta))
-
     setmetatable(self, meta)
 
     function self:add(obj)
@@ -42,7 +40,7 @@ return function(components)
     end
 
     function self:destroy()
-        self.destroyed = true
+        self.destroy = true
     end
 
     return self

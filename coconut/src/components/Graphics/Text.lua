@@ -6,12 +6,6 @@ return function()
     ---@class coconut.components.TextRendererComponent
     local TextRendererComponent = {}
 
-    function TextRendererComponent:__init()
-        if self.isDataHolder then
-            error("[CoconutComponent] Can't add other components inside a dataholder component")
-        end
-    end
-
     ---@enum
     TextRendererComponent.Alignment = { LEFT = "left", CENTER = "center", RIGHT = "right" }
 

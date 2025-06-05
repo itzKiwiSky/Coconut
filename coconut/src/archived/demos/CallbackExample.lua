@@ -2,8 +2,6 @@ return function(coconut)
     local scene = coconut.Scene.newScene("myScene")
     local myFirstObject
 
-    print(inspect(scene))
-
     function scene.onSceneEnter()
         local text = coconut.Object({
             coconut.Components.Transform,
@@ -33,6 +31,10 @@ return function(coconut)
             myFirstObject.pos.x = x
             myFirstObject.pos.y = y
         end
+    end
+
+    function scene.onSceneUpdate(elapsed)
+        --myFirstObject.pos.x = myFirstObject.pos.x + elapsed * 0.5
     end
 
     coconut.Scene.switch("myScene")

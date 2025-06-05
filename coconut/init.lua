@@ -323,8 +323,8 @@ function Coconut.init(config)
     end
 
     love.quit = function()
-        print("[CoconutRuntime] Freed assets from pool")
         Coconut.Assets.resetPool()
+        print("[CoconutRuntime] Freed assets from pool")
     end
 end
 

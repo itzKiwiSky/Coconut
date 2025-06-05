@@ -15,12 +15,6 @@ return function(...)
         color = Color.WHITE,
     }
 
-    function SpriteComponent:__init()
-        if self.isDataHolder then
-            error("[CoconutComponent] Can't add other components inside a dataholder component")
-        end
-    end
-
     function SpriteComponent:__draw()
         if not self then
             self = {

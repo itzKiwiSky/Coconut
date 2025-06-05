@@ -2,6 +2,8 @@ local vec2 = import 'Math.Vec2'
 local Color = import 'Utils.Color'
 
 return function()
+    ---@protected
+    ---@class coconut.components.ShapeRendererComponent
     local ShapeRendererComponent = {}
 
     ShapeRendererComponent.FILLSTYLE = {
