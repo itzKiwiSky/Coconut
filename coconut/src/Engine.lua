@@ -7,7 +7,7 @@ local Signal = import 'utils.Signal'
 local Engine = {}
 
 --- Color of the background after a frame is rendered ---
-Engine.backgroundColor = Color.BLACK    --- @type lux.utils.Color
+Engine.backgroundColor = Color.BLACK    --- @type Coconut.utils.Color
 
 --- the window width in pixels ---
 Engine.width = 640                      --- @type integer

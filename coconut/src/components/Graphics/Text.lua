@@ -4,7 +4,9 @@ local assets = import 'utils.AssetPool'
 
 return function()
     ---@class coconut.components.TextRendererComponent
-    local TextRendererComponent = {}
+    local TextRendererComponent = {
+        name = "Text",
+    }
 
     ---@enum
     TextRendererComponent.Alignment = { LEFT = "left", CENTER = "center", RIGHT = "right" }

@@ -1,5 +1,10 @@
 local fsutils = {}
 
+---Scans a folder and get all file paths
+---@param folder string
+---@param includeFolder boolean
+---@param ignoreFolder string[]
+---@return string[]
 function fsutils.scanFolder(folder, includeFolder, ignoreFolder)
     ignoreFolder = ignoreFolder or {}
     includeFolder = includeFolder or false

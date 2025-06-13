@@ -7,6 +7,7 @@ return function(...)
 
     ---@class coconut.components.graphics.SpriteComponent
     local SpriteComponent = {
+        name = "Sprite",
         drawable = assets.get(assets.AssetType.IMAGE, "logo"),
         scale = vec2:new(1, 1),
         origin = vec2.ZERO(),

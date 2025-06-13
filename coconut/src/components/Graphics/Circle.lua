@@ -3,7 +3,9 @@ local vec2 = import 'Math.Vec2'
 local Color = import 'Utils.Color'
 
 return function()
-    local CircleShapeComponent = {}
+    local CircleShapeComponent = {
+        name = "CircleShape",
+    }
     table.deepmerge(CircleShapeComponent, ShapeRenderer())
     CircleShapeComponent.__super = CircleShapeComponent.__draw
     

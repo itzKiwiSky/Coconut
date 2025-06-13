@@ -4,7 +4,7 @@ return function()
 
     ---@class coconut.components.TransformComponent
     local TransformComponent = {
-        name = "transform",
+        name = "Transform",
         pos = vec2.ZERO(),
         z = 0,
     }

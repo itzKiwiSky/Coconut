@@ -4,6 +4,7 @@ return function()
 
     ---@class coconut.components.DataComponent
     local DataComponent = {
+        name = "Data",
         stack = {},
         isDataHolder = true,
     }

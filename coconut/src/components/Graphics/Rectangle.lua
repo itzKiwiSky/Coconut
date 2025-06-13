@@ -3,7 +3,9 @@ local vec2 = import 'Math.Vec2'
 local Color = import 'Utils.Color'
 
 return function()
-    local RectangleShapeComponent = {}
+    local RectangleShapeComponent = {
+        name = "RectangleShape",
+    }
     table.deepmerge(RectangleShapeComponent, ShapeRenderer())
     local shapeDraw = RectangleShapeComponent.__draw
 
